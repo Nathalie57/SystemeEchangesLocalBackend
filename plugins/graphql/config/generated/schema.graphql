@@ -1,0 +1,543 @@
+type Article {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String
+  published: DateTime
+  author: String
+  content: String
+}
+
+input ArticleInput {
+  title: String
+  published: DateTime
+  author: String
+  content: String
+}
+
+type Category {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  title: String
+  demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
+  offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
+}
+
+input CategoryInput {
+  title: String
+  demands: [ID]
+  offers: [ID]
+}
+
+input createArticleInput {
+  data: ArticleInput
+}
+
+type createArticlePayload {
+  article: Article
+}
+
+input createCategoryInput {
+  data: CategoryInput
+}
+
+type createCategoryPayload {
+  category: Category
+}
+
+input createDemandInput {
+  data: DemandInput
+}
+
+type createDemandPayload {
+  demand: Demand
+}
+
+input createMemberInput {
+  data: MemberInput
+}
+
+type createMemberPayload {
+  member: Member
+}
+
+input createOfferInput {
+  data: OfferInput
+}
+
+type createOfferPayload {
+  offer: Offer
+}
+
+input createRoleInput {
+  data: RoleInput
+}
+
+type createRolePayload {
+  role: UsersPermissionsRole
+}
+
+input createUserInput {
+  data: UserInput
+}
+
+type createUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""
+The `DateTime` scalar represents a date and time following the ISO 8601 standard
+"""
+scalar DateTime
+
+input deleteArticleInput {
+  where: InputID
+}
+
+type deleteArticlePayload {
+  article: Article
+}
+
+input deleteCategoryInput {
+  where: InputID
+}
+
+type deleteCategoryPayload {
+  category: Category
+}
+
+input deleteDemandInput {
+  where: InputID
+}
+
+type deleteDemandPayload {
+  demand: Demand
+}
+
+input deleteMemberInput {
+  where: InputID
+}
+
+type deleteMemberPayload {
+  member: Member
+}
+
+input deleteOfferInput {
+  where: InputID
+}
+
+type deleteOfferPayload {
+  offer: Offer
+}
+
+input deleteRoleInput {
+  where: InputID
+}
+
+type deleteRolePayload {
+  role: UsersPermissionsRole
+}
+
+input deleteUserInput {
+  where: InputID
+}
+
+type deleteUserPayload {
+  user: UsersPermissionsUser
+}
+
+type Demand {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  demand_title: String
+  demand_description: String
+  demand_date: DateTime
+  demand_expiration_date: DateTime
+  category: Category
+  member: Member
+}
+
+input DemandInput {
+  demand_title: String
+  demand_description: String
+  demand_date: DateTime
+  demand_expiration_date: DateTime
+  category: ID
+  member: ID
+}
+
+input editArticleInput {
+  title: String
+  published: DateTime
+  author: String
+  content: String
+}
+
+input editCategoryInput {
+  title: String
+  demands: [ID]
+  offers: [ID]
+}
+
+input editDemandInput {
+  demand_title: String
+  demand_description: String
+  demand_date: DateTime
+  demand_expiration_date: DateTime
+  category: ID
+  member: ID
+}
+
+input editFileInput {
+  name: String
+  hash: String
+  sha256: String
+  ext: String
+  mime: String
+  size: String
+  url: String
+  provider: String
+  public_id: String
+  related: [ID]
+}
+
+input editMemberInput {
+  member_name: String
+  member_firstname: String
+  pseudo: String
+  member_birthday: DateTime
+  phone_number: String
+  member_email: String
+  member_address: String
+  member_town: String
+  member_country: String
+  member_zip: Int
+  member_password: String
+  registration_date: DateTime
+  wallet_amount: Int
+  demands: [ID]
+  offers: [ID]
+}
+
+input editOfferInput {
+  offer_title: String
+  offer_description: String
+  offer_date: DateTime
+  offer_expiration_date: DateTime
+  category: ID
+  member: ID
+}
+
+input editRoleInput {
+  name: String
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+input editUserInput {
+  username: String
+  email: String
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+}
+
+input FileInput {
+  name: String!
+  hash: String!
+  sha256: String
+  ext: String
+  mime: String!
+  size: String!
+  url: String!
+  provider: String!
+  public_id: String
+  related: [ID]
+}
+
+input InputID {
+  id: ID!
+}
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+"""The `Long` scalar type represents 52-bit integers"""
+scalar Long
+
+type Member {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  member_name: String
+  member_firstname: String
+  pseudo: String
+  member_birthday: DateTime
+  phone_number: String
+  member_email: String
+  member_address: String
+  member_town: String
+  member_country: String
+  member_zip: Int
+  member_password: String
+  registration_date: DateTime
+  wallet_amount: Int
+  demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
+  offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
+}
+
+input MemberInput {
+  member_name: String
+  member_firstname: String
+  pseudo: String
+  member_birthday: DateTime
+  phone_number: String
+  member_email: String
+  member_address: String
+  member_town: String
+  member_country: String
+  member_zip: Int
+  member_password: String
+  registration_date: DateTime
+  wallet_amount: Int
+  demands: [ID]
+  offers: [ID]
+}
+
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Article | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Demand | createDemandPayload | updateDemandPayload | deleteDemandPayload | Member | createMemberPayload | updateMemberPayload | deleteMemberPayload | Offer | createOfferPayload | updateOfferPayload | deleteOfferPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+
+type Mutation {
+  createArticle(input: createArticleInput): createArticlePayload
+  updateArticle(input: updateArticleInput): updateArticlePayload
+  deleteArticle(input: deleteArticleInput): deleteArticlePayload
+  createCategory(input: createCategoryInput): createCategoryPayload
+  updateCategory(input: updateCategoryInput): updateCategoryPayload
+  deleteCategory(input: deleteCategoryInput): deleteCategoryPayload
+  createDemand(input: createDemandInput): createDemandPayload
+  updateDemand(input: updateDemandInput): updateDemandPayload
+  deleteDemand(input: deleteDemandInput): deleteDemandPayload
+  createMember(input: createMemberInput): createMemberPayload
+  updateMember(input: updateMemberInput): updateMemberPayload
+  deleteMember(input: deleteMemberInput): deleteMemberPayload
+  createOffer(input: createOfferInput): createOfferPayload
+  updateOffer(input: updateOfferInput): updateOfferPayload
+  deleteOffer(input: deleteOfferInput): deleteOfferPayload
+
+  """Create a new role"""
+  createRole(input: createRoleInput): createRolePayload
+
+  """Update an existing role"""
+  updateRole(input: updateRoleInput): updateRolePayload
+
+  """Delete an existing role"""
+  deleteRole(input: deleteRoleInput): deleteRolePayload
+
+  """Create a new user"""
+  createUser(input: createUserInput): createUserPayload
+
+  """Update an existing user"""
+  updateUser(input: updateUserInput): updateUserPayload
+
+  """Delete an existing user"""
+  deleteUser(input: deleteUserInput): deleteUserPayload
+  upload(refId: ID, ref: String, source: String, file: Upload!): UploadFile!
+}
+
+type Offer {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  offer_title: String
+  offer_description: String
+  offer_date: DateTime
+  offer_expiration_date: DateTime
+  category: Category
+  member: Member
+}
+
+input OfferInput {
+  offer_title: String
+  offer_description: String
+  offer_date: DateTime
+  offer_expiration_date: DateTime
+  category: ID
+  member: ID
+}
+
+type Query {
+  article(id: ID!): Article
+  articles(sort: String, limit: Int, start: Int, where: JSON): [Article]
+  category(id: ID!): Category
+  categories(sort: String, limit: Int, start: Int, where: JSON): [Category]
+  demand(id: ID!): Demand
+  demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
+  member(id: ID!): Member
+  members(sort: String, limit: Int, start: Int, where: JSON): [Member]
+  offer(id: ID!): Offer
+  offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
+  files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
+  role(id: ID!): UsersPermissionsRole
+
+  """
+  Retrieve all the existing roles. You can't apply filters on this query.
+  """
+  roles(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsRole]
+  user(id: ID!): UsersPermissionsUser
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+  me: UsersPermissionsMe
+}
+
+input RoleInput {
+  name: String!
+  description: String
+  type: String
+  permissions: [ID]
+  users: [ID]
+}
+
+input updateArticleInput {
+  where: InputID
+  data: editArticleInput
+}
+
+type updateArticlePayload {
+  article: Article
+}
+
+input updateCategoryInput {
+  where: InputID
+  data: editCategoryInput
+}
+
+type updateCategoryPayload {
+  category: Category
+}
+
+input updateDemandInput {
+  where: InputID
+  data: editDemandInput
+}
+
+type updateDemandPayload {
+  demand: Demand
+}
+
+input updateMemberInput {
+  where: InputID
+  data: editMemberInput
+}
+
+type updateMemberPayload {
+  member: Member
+}
+
+input updateOfferInput {
+  where: InputID
+  data: editOfferInput
+}
+
+type updateOfferPayload {
+  offer: Offer
+}
+
+input updateRoleInput {
+  where: InputID
+  data: editRoleInput
+}
+
+type updateRolePayload {
+  role: UsersPermissionsRole
+}
+
+input updateUserInput {
+  where: InputID
+  data: editUserInput
+}
+
+type updateUserPayload {
+  user: UsersPermissionsUser
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type UploadFile {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  name: String!
+  hash: String!
+  sha256: String
+  ext: String
+  mime: String!
+  size: String!
+  url: String!
+  provider: String!
+  public_id: String
+  related(sort: String, limit: Int, start: Int, where: JSON): [Morph]
+}
+
+input UserInput {
+  username: String!
+  email: String!
+  provider: String
+  password: String
+  resetPasswordToken: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: ID
+}
+
+type UsersPermissionsMe {
+  _id: ID!
+  username: String!
+  email: String!
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsMeRole
+}
+
+type UsersPermissionsMeRole {
+  _id: ID!
+  name: String!
+  description: String
+  type: String
+}
+
+type UsersPermissionsPermission {
+  id: ID!
+  type: String!
+  controller: String!
+  action: String!
+  enabled: Boolean!
+  policy: String
+  role: UsersPermissionsRole
+}
+
+type UsersPermissionsRole {
+  id: ID!
+  name: String!
+  description: String
+  type: String
+  permissions(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsPermission]
+  users(sort: String, limit: Int, start: Int, where: JSON): [UsersPermissionsUser]
+}
+
+type UsersPermissionsUser {
+  id: ID!
+  username: String!
+  email: String!
+  provider: String
+  confirmed: Boolean
+  blocked: Boolean
+  role: UsersPermissionsRole
+}

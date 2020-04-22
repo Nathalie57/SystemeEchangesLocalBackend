@@ -1,0 +1,62 @@
+{
+  "connection": "default",
+  "collectionName": "members",
+  "info": {
+    "name": "member",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "member_name": {
+      "type": "string"
+    },
+    "member_firstname": {
+      "type": "string"
+    },
+    "pseudo": {
+      "type": "string"
+    },
+    "member_birthday": {
+      "type": "date"
+    },
+    "phone_number": {
+      "type": "string"
+    },
+    "member_email": {
+      "type": "email"
+    },
+    "member_address": {
+      "type": "string"
+    },
+    "member_town": {
+      "type": "string"
+    },
+    "member_country": {
+      "type": "string"
+    },
+    "member_zip": {
+      "type": "integer"
+    },
+    "member_password": {
+      "type": "password"
+    },
+    "registration_date": {
+      "type": "date"
+    },
+    "wallet_amount": {
+      "type": "integer"
+    },
+    "demands": {
+      "collection": "demand",
+      "via": "member"
+    },
+    "offers": {
+      "collection": "offer",
+      "via": "member"
+    }
+  }
+}

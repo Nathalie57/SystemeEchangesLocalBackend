@@ -1,0 +1,35 @@
+{
+  "connection": "default",
+  "collectionName": "demands",
+  "info": {
+    "name": "demand",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "demand_title": {
+      "type": "string"
+    },
+    "demand_description": {
+      "type": "text"
+    },
+    "demand_date": {
+      "type": "date"
+    },
+    "demand_expiration_date": {
+      "type": "date"
+    },
+    "category": {
+      "model": "category",
+      "via": "demands"
+    },
+    "member": {
+      "model": "member",
+      "via": "demands"
+    }
+  }
+}

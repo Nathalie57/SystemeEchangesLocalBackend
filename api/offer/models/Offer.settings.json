@@ -1,0 +1,35 @@
+{
+  "connection": "default",
+  "collectionName": "offers",
+  "info": {
+    "name": "offer",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "offer_title": {
+      "type": "string"
+    },
+    "offer_description": {
+      "type": "text"
+    },
+    "offer_date": {
+      "type": "date"
+    },
+    "offer_expiration_date": {
+      "type": "date"
+    },
+    "category": {
+      "model": "category",
+      "via": "offers"
+    },
+    "member": {
+      "model": "member",
+      "via": "offers"
+    }
+  }
+}
