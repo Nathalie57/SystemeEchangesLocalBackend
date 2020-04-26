@@ -18,7 +18,9 @@
       "type": "string"
     },
     "pseudo": {
-      "type": "string"
+      "type": "string",
+      "unique": true,
+      "required": true
     },
     "member_birthday": {
       "type": "date"

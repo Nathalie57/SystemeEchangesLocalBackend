@@ -12,7 +12,9 @@
   },
   "attributes": {
     "title": {
-      "type": "string"
+      "type": "string",
+      "unique": true,
+      "required": true
     },
     "demands": {
       "collection": "demand",
