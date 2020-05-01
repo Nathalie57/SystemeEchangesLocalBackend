@@ -11,10 +11,10 @@
     "comment": ""
   },
   "attributes": {
-    "member_name": {
+    "lastname": {
       "type": "string"
     },
-    "member_firstname": {
+    "firstname": {
       "type": "string"
     },
     "pseudo": {
@@ -22,34 +22,34 @@
       "unique": true,
       "required": true
     },
-    "member_birthday": {
+    "birthday": {
       "type": "date"
     },
-    "phone_number": {
+    "phonenumber": {
       "type": "string"
     },
-    "member_email": {
+    "email": {
       "type": "email"
     },
-    "member_address": {
+    "address": {
       "type": "string"
     },
-    "member_town": {
+    "town": {
       "type": "string"
     },
-    "member_country": {
+    "country": {
       "type": "string"
     },
-    "member_zip": {
+    "zip": {
       "type": "integer"
     },
-    "member_password": {
+    "password": {
       "type": "password"
     },
-    "registration_date": {
+    "registrationDate": {
       "type": "date"
     },
-    "wallet_amount": {
+    "walletAmount": {
       "type": "integer"
     },
     "demands": {

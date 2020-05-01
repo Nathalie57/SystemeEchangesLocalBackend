@@ -11,16 +11,16 @@
     "comment": ""
   },
   "attributes": {
-    "demand_title": {
+    "title": {
       "type": "string"
     },
-    "demand_description": {
+    "description": {
       "type": "text"
     },
-    "demand_date": {
+    "demandDate": {
       "type": "date"
     },
-    "demand_expiration_date": {
+    "expirationDate": {
       "type": "date"
     },
     "category": {

@@ -151,19 +151,19 @@ type Demand {
   id: ID!
   created_at: DateTime!
   updated_at: DateTime!
-  demand_title: String
-  demand_description: String
-  demand_date: DateTime
-  demand_expiration_date: DateTime
+  title: String
+  description: String
+  demandDate: DateTime
+  expirationDate: DateTime
   category: Category
   member: Member
 }
 
 input DemandInput {
-  demand_title: String
-  demand_description: String
-  demand_date: DateTime
-  demand_expiration_date: DateTime
+  title: String
+  description: String
+  demandDate: DateTime
+  expirationDate: DateTime
   category: ID
   member: ID
 }
@@ -182,10 +182,10 @@ input editCategoryInput {
 }
 
 input editDemandInput {
-  demand_title: String
-  demand_description: String
-  demand_date: DateTime
-  demand_expiration_date: DateTime
+  title: String
+  description: String
+  demandDate: DateTime
+  expirationDate: DateTime
   category: ID
   member: ID
 }
@@ -204,28 +204,28 @@ input editFileInput {
 }
 
 input editMemberInput {
-  member_name: String
-  member_firstname: String
+  lastname: String
+  firstname: String
   pseudo: String
-  member_birthday: DateTime
-  phone_number: String
-  member_email: String
-  member_address: String
-  member_town: String
-  member_country: String
-  member_zip: Int
-  member_password: String
-  registration_date: DateTime
-  wallet_amount: Int
+  birthday: DateTime
+  phonenumber: String
+  email: String
+  address: String
+  town: String
+  country: String
+  zip: Int
+  password: String
+  registrationDate: DateTime
+  walletAmount: Int
   demands: [ID]
   offers: [ID]
 }
 
 input editOfferInput {
-  offer_title: String
-  offer_description: String
-  offer_date: DateTime
-  offer_expiration_date: DateTime
+  title: String
+  description: String
+  offerDate: DateTime
+  expirationDate: DateTime
   category: ID
   member: ID
 }
@@ -278,37 +278,37 @@ type Member {
   id: ID!
   created_at: DateTime!
   updated_at: DateTime!
-  member_name: String
-  member_firstname: String
+  lastname: String
+  firstname: String
   pseudo: String!
-  member_birthday: DateTime
-  phone_number: String
-  member_email: String
-  member_address: String
-  member_town: String
-  member_country: String
-  member_zip: Int
-  member_password: String
-  registration_date: DateTime
-  wallet_amount: Int
+  birthday: DateTime
+  phonenumber: String
+  email: String
+  address: String
+  town: String
+  country: String
+  zip: Int
+  password: String
+  registrationDate: DateTime
+  walletAmount: Int
   demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
   offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
 }
 
 input MemberInput {
-  member_name: String
-  member_firstname: String
+  lastname: String
+  firstname: String
   pseudo: String!
-  member_birthday: DateTime
-  phone_number: String
-  member_email: String
-  member_address: String
-  member_town: String
-  member_country: String
-  member_zip: Int
-  member_password: String
-  registration_date: DateTime
-  wallet_amount: Int
+  birthday: DateTime
+  phonenumber: String
+  email: String
+  address: String
+  town: String
+  country: String
+  zip: Int
+  password: String
+  registrationDate: DateTime
+  walletAmount: Int
   demands: [ID]
   offers: [ID]
 }
@@ -356,19 +356,19 @@ type Offer {
   id: ID!
   created_at: DateTime!
   updated_at: DateTime!
-  offer_title: String
-  offer_description: String
-  offer_date: DateTime
-  offer_expiration_date: DateTime
+  title: String
+  description: String
+  offerDate: DateTime
+  expirationDate: DateTime
   category: Category
   member: Member
 }
 
 input OfferInput {
-  offer_title: String
-  offer_description: String
-  offer_date: DateTime
-  offer_expiration_date: DateTime
+  title: String
+  description: String
+  offerDate: DateTime
+  expirationDate: DateTime
   category: ID
   member: ID
 }
