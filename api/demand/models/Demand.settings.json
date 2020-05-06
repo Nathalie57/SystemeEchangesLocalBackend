@@ -30,6 +30,15 @@
     "member": {
       "model": "member",
       "via": "demands"
+    },
+    "state": {
+      "type": "integer"
+    },
+    "amount": {
+      "type": "integer"
+    },
+    "memberExchange": {
+      "model": "member"
     }
   }
 }

@@ -157,6 +157,9 @@ type Demand {
   expirationDate: DateTime
   category: Category
   member: Member
+  state: Int
+  amount: Int
+  memberExchange: Member
 }
 
 input DemandInput {
@@ -166,6 +169,9 @@ input DemandInput {
   expirationDate: DateTime
   category: ID
   member: ID
+  state: Int
+  amount: Int
+  memberExchange: ID
 }
 
 input editArticleInput {
@@ -188,6 +194,9 @@ input editDemandInput {
   expirationDate: DateTime
   category: ID
   member: ID
+  state: Int
+  amount: Int
+  memberExchange: ID
 }
 
 input editFileInput {
@@ -228,6 +237,9 @@ input editOfferInput {
   expirationDate: DateTime
   category: ID
   member: ID
+  state: Int
+  amount: Int
+  memberExchange: ID
 }
 
 input editRoleInput {
@@ -362,6 +374,9 @@ type Offer {
   expirationDate: DateTime
   category: Category
   member: Member
+  state: Int
+  amount: Int
+  memberExchange: Member
 }
 
 input OfferInput {
@@ -371,6 +386,9 @@ input OfferInput {
   expirationDate: DateTime
   category: ID
   member: ID
+  state: Int
+  amount: Int
+  memberExchange: ID
 }
 
 type Query {
