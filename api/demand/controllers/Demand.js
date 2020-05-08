@@ -63,6 +63,23 @@ module.exports = {
   },
 
   /**
+   * Update a/an transaction.
+   *
+   * @return {Object}
+   */
+  updateTransaction: async (ctx, next) => {
+    const member = await strapi.services.demand.member.find({id});
+    const newAmount = member.walletAmount + ctx.request.body.demand.amount;
+    let entity = await strapi.service.member.update({id}, {newAmount});
+
+    const memberExchange = await strapi.services.demand.memberExchange.find({id});
+    const newAmountMemberExchange = memberExchange.walletAmount + ctx.request.body.demand.amount;
+    let entityMemberExchange = await strapi.service.memberExchange.update({id}, {newAmountMemberExchange});
+
+    ctx.send("{succeed:true}")
+  },
+
+  /**
    * Destroy a/an demand record.
    *
    * @return {Object}
