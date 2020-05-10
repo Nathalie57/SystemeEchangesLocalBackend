@@ -1,0 +1,23 @@
+{
+  "connection": "default",
+  "collectionName": "tokens",
+  "info": {
+    "name": "token",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "comment": ""
+  },
+  "attributes": {
+    "token": {
+      "type": "string"
+    },
+    "user": {
+      "model": "user",
+      "via": "token",
+      "plugin": "users-permissions"
+    }
+  }
+}

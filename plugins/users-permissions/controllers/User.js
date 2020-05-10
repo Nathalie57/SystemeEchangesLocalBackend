@@ -7,6 +7,7 @@
  */
 
 const _ = require('lodash');
+const jwt = require('jsonwebtoken');
 
 module.exports = {
 

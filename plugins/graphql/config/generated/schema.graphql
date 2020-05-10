@@ -78,6 +78,14 @@ type createRolePayload {
   role: UsersPermissionsRole
 }
 
+input createTokenInput {
+  data: TokenInput
+}
+
+type createTokenPayload {
+  token: Token
+}
+
 input createUserInput {
   data: UserInput
 }
@@ -137,6 +145,14 @@ input deleteRoleInput {
 
 type deleteRolePayload {
   role: UsersPermissionsRole
+}
+
+input deleteTokenInput {
+  where: InputID
+}
+
+type deleteTokenPayload {
+  token: Token
 }
 
 input deleteUserInput {
@@ -222,12 +238,12 @@ input editMemberInput {
   address: String
   town: String
   country: String
-  zip: Int
   password: String
   registrationDate: DateTime
   walletAmount: Int
   demands: [ID]
   offers: [ID]
+  zip: String
 }
 
 input editOfferInput {
@@ -250,6 +266,11 @@ input editRoleInput {
   users: [ID]
 }
 
+input editTokenInput {
+  token: String
+  user: ID
+}
+
 input editUserInput {
   username: String
   email: String
@@ -259,6 +280,7 @@ input editUserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
+  token: ID
 }
 
 input FileInput {
@@ -299,10 +321,10 @@ type Member {
   address: String
   town: String
   country: String
-  zip: Int
   password: String
   registrationDate: DateTime
   walletAmount: Int
+  zip: String
   demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
   offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
 }
@@ -317,15 +339,15 @@ input MemberInput {
   address: String
   town: String
   country: String
-  zip: Int
   password: String
   registrationDate: DateTime
   walletAmount: Int
   demands: [ID]
   offers: [ID]
+  zip: String
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Article | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Demand | createDemandPayload | updateDemandPayload | deleteDemandPayload | Member | createMemberPayload | updateMemberPayload | deleteMemberPayload | Offer | createOfferPayload | updateOfferPayload | deleteOfferPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Article | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Demand | createDemandPayload | updateDemandPayload | deleteDemandPayload | Member | createMemberPayload | updateMemberPayload | deleteMemberPayload | Offer | createOfferPayload | updateOfferPayload | deleteOfferPayload | Token | createTokenPayload | updateTokenPayload | deleteTokenPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createArticle(input: createArticleInput): createArticlePayload
@@ -343,6 +365,9 @@ type Mutation {
   createOffer(input: createOfferInput): createOfferPayload
   updateOffer(input: updateOfferInput): updateOfferPayload
   deleteOffer(input: deleteOfferInput): deleteOfferPayload
+  createToken(input: createTokenInput): createTokenPayload
+  updateToken(input: updateTokenInput): updateTokenPayload
+  deleteToken(input: deleteTokenInput): deleteTokenPayload
 
   """Create a new role"""
   createRole(input: createRoleInput): createRolePayload
@@ -402,6 +427,8 @@ type Query {
   members(sort: String, limit: Int, start: Int, where: JSON): [Member]
   offer(id: ID!): Offer
   offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
+  token(id: ID!): Token
+  tokens(sort: String, limit: Int, start: Int, where: JSON): [Token]
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   role(id: ID!): UsersPermissionsRole
 
@@ -420,6 +447,19 @@ input RoleInput {
   type: String
   permissions: [ID]
   users: [ID]
+}
+
+type Token {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  token: String
+  user: UsersPermissionsUser
+}
+
+input TokenInput {
+  token: String
+  user: ID
 }
 
 input updateArticleInput {
@@ -476,6 +516,15 @@ type updateRolePayload {
   role: UsersPermissionsRole
 }
 
+input updateTokenInput {
+  where: InputID
+  data: editTokenInput
+}
+
+type updateTokenPayload {
+  token: Token
+}
+
 input updateUserInput {
   where: InputID
   data: editUserInput
@@ -513,6 +562,7 @@ input UserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
+  token: ID
 }
 
 type UsersPermissionsMe {
@@ -558,4 +608,5 @@ type UsersPermissionsUser {
   confirmed: Boolean
   blocked: Boolean
   role: UsersPermissionsRole
+  token: Token
 }

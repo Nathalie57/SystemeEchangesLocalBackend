@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "graphql": "^15.0.0",
+    "jsonwebtoken": "^8.5.1",
     "knex": "latest",
     "lodash": "^4.17.5",
     "sqlite3": "^4.1.1",
