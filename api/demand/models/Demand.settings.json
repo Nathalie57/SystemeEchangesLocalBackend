@@ -27,9 +27,10 @@
       "model": "category",
       "via": "demands"
     },
-    "member": {
-      "model": "member",
-      "via": "demands"
+    "user": {
+      "model": "user",
+      "via": "demands",
+      "plugin": "users-permissions"
     },
     "state": {
       "type": "integer"
@@ -37,8 +38,9 @@
     "amount": {
       "type": "integer"
     },
-    "memberExchange": {
-      "model": "member"
+    "userExchange": {
+      "model": "user",
+      "plugin": "users-permissions"
     }
   }
 }

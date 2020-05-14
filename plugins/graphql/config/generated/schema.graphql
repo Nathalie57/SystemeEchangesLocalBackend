@@ -22,12 +22,14 @@ type Category {
   title: String!
   demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
   offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
+  propositions(sort: String, limit: Int, start: Int, where: JSON): [Proposition]
 }
 
 input CategoryInput {
   title: String!
   demands: [ID]
   offers: [ID]
+  propositions: [ID]
 }
 
 input createArticleInput {
@@ -68,6 +70,14 @@ input createOfferInput {
 
 type createOfferPayload {
   offer: Offer
+}
+
+input createPropositionInput {
+  data: PropositionInput
+}
+
+type createPropositionPayload {
+  proposition: Proposition
 }
 
 input createRoleInput {
@@ -139,6 +149,14 @@ type deleteOfferPayload {
   offer: Offer
 }
 
+input deletePropositionInput {
+  where: InputID
+}
+
+type deletePropositionPayload {
+  proposition: Proposition
+}
+
 input deleteRoleInput {
   where: InputID
 }
@@ -172,10 +190,10 @@ type Demand {
   demandDate: DateTime
   expirationDate: DateTime
   category: Category
-  member: Member
+  user: UsersPermissionsUser
   state: Int
   amount: Int
-  memberExchange: Member
+  userExchange: UsersPermissionsUser
 }
 
 input DemandInput {
@@ -184,10 +202,10 @@ input DemandInput {
   demandDate: DateTime
   expirationDate: DateTime
   category: ID
-  member: ID
+  user: ID
   state: Int
   amount: Int
-  memberExchange: ID
+  userExchange: ID
 }
 
 input editArticleInput {
@@ -201,6 +219,7 @@ input editCategoryInput {
   title: String
   demands: [ID]
   offers: [ID]
+  propositions: [ID]
 }
 
 input editDemandInput {
@@ -209,10 +228,10 @@ input editDemandInput {
   demandDate: DateTime
   expirationDate: DateTime
   category: ID
-  member: ID
+  user: ID
   state: Int
   amount: Int
-  memberExchange: ID
+  userExchange: ID
 }
 
 input editFileInput {
@@ -241,9 +260,8 @@ input editMemberInput {
   password: String
   registrationDate: DateTime
   walletAmount: Int
-  demands: [ID]
-  offers: [ID]
   zip: String
+  role: ID
 }
 
 input editOfferInput {
@@ -252,10 +270,23 @@ input editOfferInput {
   offerDate: DateTime
   expirationDate: DateTime
   category: ID
-  member: ID
+  user: ID
   state: Int
   amount: Int
-  memberExchange: ID
+  userExchange: ID
+}
+
+input editPropositionInput {
+  propositionType: String
+  title: String
+  propositionDate: DateTime
+  expirationDate: DateTime
+  state: Int
+  amount: Int
+  category: ID
+  user: ID
+  userExchange: ID
+  description: String
 }
 
 input editRoleInput {
@@ -281,6 +312,18 @@ input editUserInput {
   blocked: Boolean
   role: ID
   token: ID
+  lastname: String
+  firstname: String
+  birthday: DateTime
+  phonenumber: String
+  address: String
+  town: String
+  zip: String
+  registrationDate: DateTime
+  walletAmount: Int
+  propositions: [ID]
+  demands: [ID]
+  offers: [ID]
 }
 
 input FileInput {
@@ -325,8 +368,7 @@ type Member {
   registrationDate: DateTime
   walletAmount: Int
   zip: String
-  demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
-  offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
+  role: UsersPermissionsRole
 }
 
 input MemberInput {
@@ -342,12 +384,11 @@ input MemberInput {
   password: String
   registrationDate: DateTime
   walletAmount: Int
-  demands: [ID]
-  offers: [ID]
   zip: String
+  role: ID
 }
 
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Article | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Demand | createDemandPayload | updateDemandPayload | deleteDemandPayload | Member | createMemberPayload | updateMemberPayload | deleteMemberPayload | Offer | createOfferPayload | updateOfferPayload | deleteOfferPayload | Token | createTokenPayload | updateTokenPayload | deleteTokenPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Article | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Demand | createDemandPayload | updateDemandPayload | deleteDemandPayload | Member | createMemberPayload | updateMemberPayload | deleteMemberPayload | Offer | createOfferPayload | updateOfferPayload | deleteOfferPayload | Proposition | createPropositionPayload | updatePropositionPayload | deletePropositionPayload | Token | createTokenPayload | updateTokenPayload | deleteTokenPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createArticle(input: createArticleInput): createArticlePayload
@@ -365,6 +406,9 @@ type Mutation {
   createOffer(input: createOfferInput): createOfferPayload
   updateOffer(input: updateOfferInput): updateOfferPayload
   deleteOffer(input: deleteOfferInput): deleteOfferPayload
+  createProposition(input: createPropositionInput): createPropositionPayload
+  updateProposition(input: updatePropositionInput): updatePropositionPayload
+  deleteProposition(input: deletePropositionInput): deletePropositionPayload
   createToken(input: createTokenInput): createTokenPayload
   updateToken(input: updateTokenInput): updateTokenPayload
   deleteToken(input: deleteTokenInput): deleteTokenPayload
@@ -398,10 +442,10 @@ type Offer {
   offerDate: DateTime
   expirationDate: DateTime
   category: Category
-  member: Member
+  user: UsersPermissionsUser
   state: Int
   amount: Int
-  memberExchange: Member
+  userExchange: UsersPermissionsUser
 }
 
 input OfferInput {
@@ -410,10 +454,39 @@ input OfferInput {
   offerDate: DateTime
   expirationDate: DateTime
   category: ID
-  member: ID
+  user: ID
   state: Int
   amount: Int
-  memberExchange: ID
+  userExchange: ID
+}
+
+type Proposition {
+  id: ID!
+  created_at: DateTime!
+  updated_at: DateTime!
+  propositionType: String
+  title: String
+  propositionDate: DateTime
+  expirationDate: DateTime
+  state: Int
+  amount: Int
+  category: Category
+  user: UsersPermissionsUser
+  userExchange: UsersPermissionsUser
+  description: String
+}
+
+input PropositionInput {
+  propositionType: String
+  title: String
+  propositionDate: DateTime
+  expirationDate: DateTime
+  state: Int
+  amount: Int
+  category: ID
+  user: ID
+  userExchange: ID
+  description: String
 }
 
 type Query {
@@ -427,6 +500,8 @@ type Query {
   members(sort: String, limit: Int, start: Int, where: JSON): [Member]
   offer(id: ID!): Offer
   offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
+  proposition(id: ID!): Proposition
+  propositions(sort: String, limit: Int, start: Int, where: JSON): [Proposition]
   token(id: ID!): Token
   tokens(sort: String, limit: Int, start: Int, where: JSON): [Token]
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
@@ -507,6 +582,15 @@ type updateOfferPayload {
   offer: Offer
 }
 
+input updatePropositionInput {
+  where: InputID
+  data: editPropositionInput
+}
+
+type updatePropositionPayload {
+  proposition: Proposition
+}
+
 input updateRoleInput {
   where: InputID
   data: editRoleInput
@@ -563,6 +647,18 @@ input UserInput {
   blocked: Boolean
   role: ID
   token: ID
+  lastname: String
+  firstname: String
+  birthday: DateTime
+  phonenumber: String
+  address: String
+  town: String
+  zip: String
+  registrationDate: DateTime
+  walletAmount: Int
+  propositions: [ID]
+  demands: [ID]
+  offers: [ID]
 }
 
 type UsersPermissionsMe {
@@ -609,4 +705,16 @@ type UsersPermissionsUser {
   blocked: Boolean
   role: UsersPermissionsRole
   token: Token
+  lastname: String
+  firstname: String
+  birthday: DateTime
+  phonenumber: String
+  address: String
+  town: String
+  zip: String
+  registrationDate: DateTime
+  walletAmount: Int
+  propositions(sort: String, limit: Int, start: Int, where: JSON): [Proposition]
+  demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
+  offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
 }

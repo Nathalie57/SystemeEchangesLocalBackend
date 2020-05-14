@@ -1,8 +1,8 @@
 {
   "connection": "default",
-  "collectionName": "offers",
+  "collectionName": "propositions",
   "info": {
-    "name": "offer",
+    "name": "proposition",
     "description": ""
   },
   "options": {
@@ -11,26 +11,17 @@
     "comment": ""
   },
   "attributes": {
+    "propositionType": {
+      "type": "string"
+    },
     "title": {
       "type": "string"
     },
-    "description": {
-      "type": "text"
-    },
-    "offerDate": {
+    "propositionDate": {
       "type": "date"
     },
     "expirationDate": {
       "type": "date"
-    },
-    "category": {
-      "model": "category",
-      "via": "offers"
-    },
-    "user": {
-      "model": "user",
-      "via": "offers",
-      "plugin": "users-permissions"
     },
     "state": {
       "type": "integer"
@@ -38,9 +29,21 @@
     "amount": {
       "type": "integer"
     },
+    "category": {
+      "model": "category",
+      "via": "propositions"
+    },
+    "user": {
+      "model": "user",
+      "via": "propositions",
+      "plugin": "users-permissions"
+    },
     "userExchange": {
       "model": "user",
       "plugin": "users-permissions"
+    },
+    "description": {
+      "type": "text"
     }
   }
 }

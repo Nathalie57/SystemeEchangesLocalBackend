@@ -52,6 +52,45 @@
     "token": {
       "model": "token",
       "via": "user"
+    },
+    "lastname": {
+      "type": "string"
+    },
+    "firstname": {
+      "type": "string"
+    },
+    "birthday": {
+      "type": "date"
+    },
+    "phonenumber": {
+      "type": "string"
+    },
+    "address": {
+      "type": "string"
+    },
+    "town": {
+      "type": "string"
+    },
+    "zip": {
+      "type": "string"
+    },
+    "registrationDate": {
+      "type": "date"
+    },
+    "walletAmount": {
+      "type": "integer"
+    },
+    "propositions": {
+      "collection": "proposition",
+      "via": "user"
+    },
+    "demands": {
+      "collection": "demand",
+      "via": "user"
+    },
+    "offers": {
+      "collection": "offer",
+      "via": "user"
     }
   },
   "collectionName": "users-permissions_user"
