@@ -22,14 +22,12 @@ type Category {
   title: String!
   demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
   offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
-  propositions(sort: String, limit: Int, start: Int, where: JSON): [Proposition]
 }
 
 input CategoryInput {
   title: String!
   demands: [ID]
   offers: [ID]
-  propositions: [ID]
 }
 
 input createArticleInput {
@@ -56,14 +54,6 @@ type createDemandPayload {
   demand: Demand
 }
 
-input createMemberInput {
-  data: MemberInput
-}
-
-type createMemberPayload {
-  member: Member
-}
-
 input createOfferInput {
   data: OfferInput
 }
@@ -72,28 +62,12 @@ type createOfferPayload {
   offer: Offer
 }
 
-input createPropositionInput {
-  data: PropositionInput
-}
-
-type createPropositionPayload {
-  proposition: Proposition
-}
-
 input createRoleInput {
   data: RoleInput
 }
 
 type createRolePayload {
   role: UsersPermissionsRole
-}
-
-input createTokenInput {
-  data: TokenInput
-}
-
-type createTokenPayload {
-  token: Token
 }
 
 input createUserInput {
@@ -133,14 +107,6 @@ type deleteDemandPayload {
   demand: Demand
 }
 
-input deleteMemberInput {
-  where: InputID
-}
-
-type deleteMemberPayload {
-  member: Member
-}
-
 input deleteOfferInput {
   where: InputID
 }
@@ -149,28 +115,12 @@ type deleteOfferPayload {
   offer: Offer
 }
 
-input deletePropositionInput {
-  where: InputID
-}
-
-type deletePropositionPayload {
-  proposition: Proposition
-}
-
 input deleteRoleInput {
   where: InputID
 }
 
 type deleteRolePayload {
   role: UsersPermissionsRole
-}
-
-input deleteTokenInput {
-  where: InputID
-}
-
-type deleteTokenPayload {
-  token: Token
 }
 
 input deleteUserInput {
@@ -219,7 +169,6 @@ input editCategoryInput {
   title: String
   demands: [ID]
   offers: [ID]
-  propositions: [ID]
 }
 
 input editDemandInput {
@@ -247,23 +196,6 @@ input editFileInput {
   related: [ID]
 }
 
-input editMemberInput {
-  lastname: String
-  firstname: String
-  pseudo: String
-  birthday: DateTime
-  phonenumber: String
-  email: String
-  address: String
-  town: String
-  country: String
-  password: String
-  registrationDate: DateTime
-  walletAmount: Int
-  zip: String
-  role: ID
-}
-
 input editOfferInput {
   title: String
   description: String
@@ -276,30 +208,12 @@ input editOfferInput {
   userExchange: ID
 }
 
-input editPropositionInput {
-  propositionType: String
-  title: String
-  propositionDate: DateTime
-  expirationDate: DateTime
-  state: Int
-  amount: Int
-  category: ID
-  user: ID
-  userExchange: ID
-  description: String
-}
-
 input editRoleInput {
   name: String
   description: String
   type: String
   permissions: [ID]
   users: [ID]
-}
-
-input editTokenInput {
-  token: String
-  user: ID
 }
 
 input editUserInput {
@@ -311,7 +225,6 @@ input editUserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
-  token: ID
   lastname: String
   firstname: String
   birthday: DateTime
@@ -321,7 +234,6 @@ input editUserInput {
   zip: String
   registrationDate: DateTime
   walletAmount: Int
-  propositions: [ID]
   demands: [ID]
   offers: [ID]
 }
@@ -351,44 +263,7 @@ scalar JSON
 """The `Long` scalar type represents 52-bit integers"""
 scalar Long
 
-type Member {
-  id: ID!
-  created_at: DateTime!
-  updated_at: DateTime!
-  lastname: String
-  firstname: String
-  pseudo: String!
-  birthday: DateTime
-  phonenumber: String
-  email: String
-  address: String
-  town: String
-  country: String
-  password: String
-  registrationDate: DateTime
-  walletAmount: Int
-  zip: String
-  role: UsersPermissionsRole
-}
-
-input MemberInput {
-  lastname: String
-  firstname: String
-  pseudo: String!
-  birthday: DateTime
-  phonenumber: String
-  email: String
-  address: String
-  town: String
-  country: String
-  password: String
-  registrationDate: DateTime
-  walletAmount: Int
-  zip: String
-  role: ID
-}
-
-union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Article | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Demand | createDemandPayload | updateDemandPayload | deleteDemandPayload | Member | createMemberPayload | updateMemberPayload | deleteMemberPayload | Offer | createOfferPayload | updateOfferPayload | deleteOfferPayload | Proposition | createPropositionPayload | updatePropositionPayload | deletePropositionPayload | Token | createTokenPayload | updateTokenPayload | deleteTokenPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
+union Morph = UsersPermissionsMe | UsersPermissionsMeRole | Article | createArticlePayload | updateArticlePayload | deleteArticlePayload | Category | createCategoryPayload | updateCategoryPayload | deleteCategoryPayload | Demand | createDemandPayload | updateDemandPayload | deleteDemandPayload | Offer | createOfferPayload | updateOfferPayload | deleteOfferPayload | UploadFile | UsersPermissionsPermission | UsersPermissionsRole | createRolePayload | updateRolePayload | deleteRolePayload | UsersPermissionsUser | createUserPayload | updateUserPayload | deleteUserPayload
 
 type Mutation {
   createArticle(input: createArticleInput): createArticlePayload
@@ -400,18 +275,9 @@ type Mutation {
   createDemand(input: createDemandInput): createDemandPayload
   updateDemand(input: updateDemandInput): updateDemandPayload
   deleteDemand(input: deleteDemandInput): deleteDemandPayload
-  createMember(input: createMemberInput): createMemberPayload
-  updateMember(input: updateMemberInput): updateMemberPayload
-  deleteMember(input: deleteMemberInput): deleteMemberPayload
   createOffer(input: createOfferInput): createOfferPayload
   updateOffer(input: updateOfferInput): updateOfferPayload
   deleteOffer(input: deleteOfferInput): deleteOfferPayload
-  createProposition(input: createPropositionInput): createPropositionPayload
-  updateProposition(input: updatePropositionInput): updatePropositionPayload
-  deleteProposition(input: deletePropositionInput): deletePropositionPayload
-  createToken(input: createTokenInput): createTokenPayload
-  updateToken(input: updateTokenInput): updateTokenPayload
-  deleteToken(input: deleteTokenInput): deleteTokenPayload
 
   """Create a new role"""
   createRole(input: createRoleInput): createRolePayload
@@ -460,35 +326,6 @@ input OfferInput {
   userExchange: ID
 }
 
-type Proposition {
-  id: ID!
-  created_at: DateTime!
-  updated_at: DateTime!
-  propositionType: String
-  title: String
-  propositionDate: DateTime
-  expirationDate: DateTime
-  state: Int
-  amount: Int
-  category: Category
-  user: UsersPermissionsUser
-  userExchange: UsersPermissionsUser
-  description: String
-}
-
-input PropositionInput {
-  propositionType: String
-  title: String
-  propositionDate: DateTime
-  expirationDate: DateTime
-  state: Int
-  amount: Int
-  category: ID
-  user: ID
-  userExchange: ID
-  description: String
-}
-
 type Query {
   article(id: ID!): Article
   articles(sort: String, limit: Int, start: Int, where: JSON): [Article]
@@ -496,14 +333,8 @@ type Query {
   categories(sort: String, limit: Int, start: Int, where: JSON): [Category]
   demand(id: ID!): Demand
   demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
-  member(id: ID!): Member
-  members(sort: String, limit: Int, start: Int, where: JSON): [Member]
   offer(id: ID!): Offer
   offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
-  proposition(id: ID!): Proposition
-  propositions(sort: String, limit: Int, start: Int, where: JSON): [Proposition]
-  token(id: ID!): Token
-  tokens(sort: String, limit: Int, start: Int, where: JSON): [Token]
   files(sort: String, limit: Int, start: Int, where: JSON): [UploadFile]
   role(id: ID!): UsersPermissionsRole
 
@@ -522,19 +353,6 @@ input RoleInput {
   type: String
   permissions: [ID]
   users: [ID]
-}
-
-type Token {
-  id: ID!
-  created_at: DateTime!
-  updated_at: DateTime!
-  token: String
-  user: UsersPermissionsUser
-}
-
-input TokenInput {
-  token: String
-  user: ID
 }
 
 input updateArticleInput {
@@ -564,15 +382,6 @@ type updateDemandPayload {
   demand: Demand
 }
 
-input updateMemberInput {
-  where: InputID
-  data: editMemberInput
-}
-
-type updateMemberPayload {
-  member: Member
-}
-
 input updateOfferInput {
   where: InputID
   data: editOfferInput
@@ -582,15 +391,6 @@ type updateOfferPayload {
   offer: Offer
 }
 
-input updatePropositionInput {
-  where: InputID
-  data: editPropositionInput
-}
-
-type updatePropositionPayload {
-  proposition: Proposition
-}
-
 input updateRoleInput {
   where: InputID
   data: editRoleInput
@@ -598,15 +398,6 @@ input updateRoleInput {
 
 type updateRolePayload {
   role: UsersPermissionsRole
-}
-
-input updateTokenInput {
-  where: InputID
-  data: editTokenInput
-}
-
-type updateTokenPayload {
-  token: Token
 }
 
 input updateUserInput {
@@ -646,7 +437,6 @@ input UserInput {
   confirmed: Boolean
   blocked: Boolean
   role: ID
-  token: ID
   lastname: String
   firstname: String
   birthday: DateTime
@@ -656,7 +446,6 @@ input UserInput {
   zip: String
   registrationDate: DateTime
   walletAmount: Int
-  propositions: [ID]
   demands: [ID]
   offers: [ID]
 }
@@ -704,7 +493,6 @@ type UsersPermissionsUser {
   confirmed: Boolean
   blocked: Boolean
   role: UsersPermissionsRole
-  token: Token
   lastname: String
   firstname: String
   birthday: DateTime
@@ -714,7 +502,6 @@ type UsersPermissionsUser {
   zip: String
   registrationDate: DateTime
   walletAmount: Int
-  propositions(sort: String, limit: Int, start: Int, where: JSON): [Proposition]
   demands(sort: String, limit: Int, start: Int, where: JSON): [Demand]
   offers(sort: String, limit: Int, start: Int, where: JSON): [Offer]
 }

@@ -23,10 +23,6 @@
     "offers": {
       "collection": "offer",
       "via": "category"
-    },
-    "propositions": {
-      "collection": "proposition",
-      "via": "category"
     }
   }
 }

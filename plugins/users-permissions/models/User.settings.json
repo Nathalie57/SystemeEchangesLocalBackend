@@ -49,10 +49,6 @@
       "plugin": "users-permissions",
       "configurable": false
     },
-    "token": {
-      "model": "token",
-      "via": "user"
-    },
     "lastname": {
       "type": "string"
     },
@@ -79,10 +75,6 @@
     },
     "walletAmount": {
       "type": "integer"
-    },
-    "propositions": {
-      "collection": "proposition",
-      "via": "user"
     },
     "demands": {
       "collection": "demand",
