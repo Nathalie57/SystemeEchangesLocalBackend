@@ -22,9 +22,9 @@
     "graphql": "^15.0.0",
     "jsonwebtoken": "^8.5.1",
     "knex": "latest",
-    "lodash": "^4.17.5",
+    "lodash": "^4.17.23",
     "sqlite3": "^4.1.1",
-    "strapi": "3.0.0-alpha.26.2",
+    "strapi": "3.0.0-rc.1",
     "strapi-hook-bookshelf": "3.0.0-alpha.26.2",
     "strapi-hook-knex": "3.0.0-alpha.26.2",
     "strapi-utils": "3.0.0-alpha.26.2"
